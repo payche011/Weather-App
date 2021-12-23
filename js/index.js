@@ -4,7 +4,7 @@ const details = document.querySelector(".details");
 const time = document.querySelector("img.time");
 const icon = document.querySelector(".icon img");
 
-const udateUi = (data) => {
+const updateUi = (data) => {
   // const cityDets = data.cityDets;
   // const wheater = data.wheater;
 
@@ -54,6 +54,16 @@ cityForm.addEventListener("submit", (e) => {
 
   // update UI with new city
   updateCity(city)
-    .then((data) => udateUi(data))
+    .then((data) => updateUi(data))
     .catch((err) => console.log(err));
+
+  // set local storage
+
+  localStorage.setItem("city", city);
 });
+
+if (localStorage.getItem("city")) {
+  updateCity(localStorage.getItem("city"))
+    .then((data) => updateUi(data))
+    .catch((err) => console.log(err));
+}
